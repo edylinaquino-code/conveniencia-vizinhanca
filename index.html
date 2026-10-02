@@ -1,618 +1,561 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conveniência da Vizinhança</title>
-  <style>
-    :root {
-      --bg: #f7f4ee;
-      --card: #ffffff;
-      --primary: #d64545;
-      --primary-dark: #b93030;
-      --gold-1: #f8ebba;
-      --gold-2: #f0c95d;
-      --gold-3: #d59c2b;
-      --gold-4: #855712;
-      --dark: #080808;
-      --dark-2: #171717;
-      --text: #1c1c1c;
-      --muted: #6f6f6f;
-      --border: #ebebeb;
-      --shadow: 0 14px 32px rgba(0,0,0,0.12);
-      --cart-bg: linear-gradient(180deg, #fffdf9 0%, #fff7ee 100%);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #fff8f1 0%, var(--bg) 100%);
-      color: var(--text);
-    }
-
-    .container {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 24px 16px 60px;
-    }
-
-    .header {
-      position: relative;
-      background: radial-gradient(circle at center, rgba(34,34,34,0.98) 0%, rgba(8,8,8,0.98) 52%, #000000 100%);
-      color: #fff;
-      border-radius: 24px;
-      padding: 26px 20px 28px;
-      box-shadow: 0 16px 30px rgba(0,0,0,0.18);
-      text-align: center;
-      margin-bottom: 22px;
-      border: 2px solid rgba(221, 170, 68, 0.9);
-      overflow: hidden;
-    }
-
-    .header::before,
-    .header::after {
-      content: "";
-      position: absolute;
-      left: 7%;
-      right: 7%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(247,204,95,0.92), transparent);
-    }
-
-    .header::before { top: 18px; }
-    .header::after { bottom: 18px; }
-
-    .brand-mark {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 190px;
-      height: 96px;
-      margin: 0 auto 8px;
-      z-index: 1;
-    }
-
-    .brand-mark svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      filter: drop-shadow(0 5px 12px rgba(255, 212, 97, 0.35));
-    }
-
-    .header-title {
-      position: relative;
-      z-index: 1;
-      margin: 0;
-      line-height: 0.9;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-weight: 900;
-      color: var(--gold-2);
-      text-shadow: 0 3px 0 rgba(0,0,0,0.18), 0 10px 20px rgba(255, 193, 53, 0.18);
-    }
-
-    .header-title .line1,
-    .header-title .line2 {
-      display: block;
-    }
-
-    .header-title .line1 {
-      font-size: clamp(2.2rem, 6vw, 4.6rem);
-    }
-
-    .header-title .line2 {
-      font-size: clamp(2.1rem, 5.2vw, 4rem);
-      color: #f7d88a;
-      text-shadow: 0 3px 0 rgba(0,0,0,0.18), 0 10px 20px rgba(255, 193, 53, 0.18);
-    }
-
-    .header-subtitle {
-      position: relative;
-      z-index: 1;
-      margin: 16px 0 0;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #f3d78f;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      opacity: 0.96;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 18px;
-    }
-
-    .product {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product:hover {
-      transform: translateY(-2px);
-    }
-
-    .image-wrapper {
-      height: 180px;
-      overflow: hidden;
-      background: #f0f0f0;
-    }
-
-    .image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .content {
-      padding: 18px 16px 20px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .name {
-      margin: 0 0 10px;
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    .price {
-      color: var(--primary);
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin: 0 0 14px;
-    }
-
-    .buy-btn {
-      margin-top: auto;
-      border: none;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 12px 18px;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 8px 18px rgba(214, 69, 69, 0.22);
-    }
-
-    .buy-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(214, 69, 69, 0.3);
-    }
-
-    .cart {
-      margin-top: 24px;
-      background: var(--cart-bg);
-      border: 1px solid rgba(180, 143, 60, 0.35);
-      border-radius: 20px;
-      box-shadow: 0 18px 34px rgba(102, 77, 15, 0.12);
-      padding: 18px 18px 16px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cart::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, var(--gold-1), var(--gold-3), var(--gold-2), var(--gold-1));
-    }
-
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin: 10px 0 14px;
-      flex-wrap: wrap;
-    }
-
-    .cart-title {
-      font-size: 1.35rem;
-      font-weight: 900;
-      margin: 0;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: var(--dark-2);
-    }
-
-    .cart-count {
-      background: linear-gradient(135deg, #fff1d8, #f9e5b7);
-      color: var(--gold-4);
-      border: 1px solid rgba(197, 150, 48, 0.25);
-      border-radius: 999px;
-      padding: 7px 12px;
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-    }
-
-    .cart-items {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      border: 1px solid rgba(218, 214, 205, 0.9);
-      border-radius: 14px;
-      background: rgba(255,255,255,0.72);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
-    }
-
-    .cart-item-name {
-      font-weight: 800;
-      flex: 1;
-      color: var(--text);
-      font-size: 0.96rem;
-    }
-
-    .cart-item-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .qty-badge {
-      background: linear-gradient(135deg, #f3f3f3, #ececec);
-      border: 1px solid rgba(0,0,0,0.05);
-      border-radius: 999px;
-      padding: 6px 9px;
-      font-size: 0.77rem;
-      font-weight: 800;
-      color: var(--dark);
-    }
-
-    .cart-item-price {
-      color: var(--primary-dark);
-      font-weight: 900;
-      min-width: 86px;
-      text-align: right;
-      font-size: 0.95rem;
-    }
-
-    .cart-empty {
-      padding: 18px 10px 16px;
-      color: var(--muted);
-      text-align: center;
-      border: 1px dashed rgba(120, 120, 120, 0.3);
-      border-radius: 14px;
-      background: rgba(255,255,255,0.35);
-      font-weight: 700;
-    }
-
-    .cart-footer {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(171, 143, 88, 0.3);
-    }
-
-    .cart-total {
-      font-size: 1.08rem;
-      font-weight: 900;
-      color: var(--dark-2);
-    }
-
-    .checkout-btn {
-      border: none;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #2ecc71, #1eb760 40%, #12984e 100%);
-      color: #fff;
-      font-size: 0.96rem;
-      font-weight: 800;
-      padding: 13px 20px;
-      cursor: pointer;
-      box-shadow: 0 10px 22px rgba(31, 167, 94, 0.26);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .checkout-btn:hover:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(31, 167, 94, 0.32);
-    }
-
-    .checkout-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding-left: 12px;
-        padding-right: 12px;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conveniência da Vizinhança</title>
+    <meta
+      name="description"
+      content="Catálogo online da Conveniência da Vizinhança com produtos e preços do dia a dia."
+    />
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --panel: #ffffff;
+        --panel-soft: #f9fafc;
+        --primary: #ff6b35;
+        --primary-dark: #e6531f;
+        --secondary: #1d2433;
+        --secondary-soft: #39465d;
+        --text: #142033;
+        --muted: #60708a;
+        --line: #e8edf5;
+        --success: #15a46d;
+        --shadow: 0 18px 40px rgba(20, 32, 51, 0.08);
       }
 
-      .image-wrapper {
-        height: 150px;
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #fffaf5 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 18px 18px 64px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 8px 22px;
+        gap: 12px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
       }
 
       .brand-mark {
-        width: 150px;
-        height: 78px;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        font-weight: 700;
+        box-shadow: 0 12px 28px rgba(255, 107, 53, 0.35);
       }
 
-      .header-title .line1 {
-        font-size: clamp(2rem, 10vw, 3rem);
+      .brand-name {
+        font-size: 1.1rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
       }
 
-      .header-title .line2 {
-        font-size: clamp(1.9rem, 9vw, 2.8rem);
+      .topbar .cta {
+        background: linear-gradient(135deg, var(--success), #0c8b5d);
+        color: white;
+        border: none;
+        border-radius: 999px;
+        padding: 12px 18px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 12px 24px rgba(21, 164, 109, 0.2);
       }
 
-      .cart-item {
-        align-items: flex-start;
+      .hero {
+        background: linear-gradient(135deg, #1a2131 0%, #2f3d5a 100%);
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        min-height: 360px;
+      }
+
+      .hero-copy {
+        display: flex;
         flex-direction: column;
+        justify-content: center;
+        padding: 44px 42px;
+        color: white;
       }
 
-      .cart-item-meta {
-        width: 100%;
+      .pill {
+        display: inline-block;
+        width: fit-content;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.12);
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+
+      .hero-copy h1 {
+        margin: 0 0 16px;
+        font-size: clamp(2.1rem, 4vw, 4rem);
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-copy p {
+        margin: 0;
+        max-width: 560px;
+        color: rgba(255,255,255,0.8);
+        font-size: 1.08rem;
+        line-height: 1.7;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        border-radius: 999px;
+        padding: 14px 20px;
+        font-weight: 700;
+        transition: transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+
+      .btn-primary:hover,
+      .btn-secondary:hover,
+      .topbar .cta:hover {
+        transform: translateY(-1px);
+      }
+
+      .hero-visual {
+        position: relative;
+        min-height: 360px;
+        background:
+          linear-gradient(180deg, rgba(18, 28, 39, 0.10), rgba(18, 28, 39, 0.10)),
+          url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      }
+
+      .bonito-card {
+        position: absolute;
+        right: 28px;
+        bottom: 28px;
+        background: rgba(255,255,255,0.95);
+        color: var(--secondary);
+        border-radius: 18px;
+        padding: 18px 20px;
+        min-width: 200px;
+        box-shadow: var(--shadow);
+      }
+
+      .bonito-card .label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .bonito-card .price {
+        margin-top: 8px;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.06em;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
         justify-content: space-between;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header class="header">
-      <div class="brand-mark" aria-label="Logo da Conveniência da Vizinhança">
-        <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-          <defs>
-            <linearGradient id="crownGold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#f9e7a4"/>
-              <stop offset="35%" stop-color="#f1c95d"/>
-              <stop offset="65%" stop-color="#d8a836"/>
-              <stop offset="100%" stop-color="#b77718"/>
-            </linearGradient>
-          </defs>
-          <path d="M25 88 L45 38 L73 68 L100 28 L128 68 L154 38 L176 88 Z" fill="url(#crownGold)"/>
-          <path d="M34 88 H166 L155 100 H45 Z" fill="url(#crownGold)"/>
-          <path d="M48 36 L56 54 L72 44 L82 58 L100 32 L118 58 L128 44 L144 54 L152 36" fill="none" stroke="#fff4b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="100" cy="32" r="6" fill="#fff4b8"/>
-          <circle cx="72" cy="44" r="4.5" fill="#fff4b8"/>
-          <circle cx="128" cy="44" r="4.5" fill="#fff4b8"/>
-        </svg>
-      </div>
-
-      <h1 class="header-title">
-        <span class="line1">Conveniência</span>
-        <span class="line2">Vizinhança</span>
-      </h1>
-
-      <p class="header-subtitle">Produtos essenciais e de qualidade para o dia a dia</p>
-    </header>
-
-    <section class="grid">
-      <article class="product">
-        <div class="image-wrapper">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5qZCB5XA1DCDxjtcwpbjJTuxl1ngn6j7D9C-Z8q5UCw&s=10" alt="Calabresa Sadia" />
-        </div>
-        <div class="content">
-          <h2 class="name">Calabresa Sadia</h2>
-          <p class="price">R$ 8,00</p>
-          <button class="buy-btn" data-name="Calabresa Sadia" data-price="8.00">Adicionar</button>
-        </div>
-      </article>
-
-      <article class="product">
-        <div class="image-wrapper">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0gTpfKSVgDsJerh1M0X3v3x8nNQ9PAj0BIg&s=10" alt="Sabonete" />
-        </div>
-        <div class="content">
-          <h2 class="name">Sabonete</h2>
-          <p class="price">R$ 2,50</p>
-          <button class="buy-btn" data-name="Sabonete" data-price="2.50">Adicionar</button>
-        </div>
-      </article>
-
-      <article class="product">
-        <div class="image-wrapper">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlR4kZZlpyP2KGG72lADnT1leo3_e0havamv9IO3N_Zw&s" alt="Miojo" />
-        </div>
-        <div class="content">
-          <h2 class="name">Miojo</h2>
-          <p class="price">R$ 2,75</p>
-          <button class="buy-btn" data-name="Miojo" data-price="2.75">Adicionar</button>
-        </div>
-      </article>
-
-      <article class="product">
-        <div class="image-wrapper">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrprukQfxxuYNp1INSXHP2FFBKj5CMfxD5-wPul9vSKA&s=10" alt="Água mineral YARA 2L" />
-        </div>
-        <div class="content">
-          <h2 class="name">Água mineral YARA 2L</h2>
-          <p class="price">R$ 5,00</p>
-          <button class="buy-btn" data-name="Água mineral YARA 2L" data-price="5.00">Adicionar</button>
-        </div>
-      </article>
-
-      <article class="product">
-        <div class="image-wrapper">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohi99TP-vIa-beEZTsRO-kycWeAi5BTuXbbPdX3pi1Q&s=10" alt="Coca-Cola 2L" />
-        </div>
-        <div class="content">
-          <h2 class="name">Coca-Cola 2L</h2>
-          <p class="price">R$ 12,00</p>
-          <button class="buy-btn" data-name="Coca-Cola 2L" data-price="12.00">Adicionar</button>
-        </div>
-      </article>
-
-      <article class="product">
-        <div class="image-wrapper">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-pv1d8MlA-W2N9JIwFYoplSWLDoFz4MqHMnBlcOoB7w&s=10" alt="Brinort detergente" />
-        </div>
-        <div class="content">
-          <h2 class="name">Brinort</h2>
-          <p class="price">R$ 3,00</p>
-          <button class="buy-btn" data-name="Brinort" data-price="3.00">Adicionar</button>
-        </div>
-      </article>
-
-      <article class="product">
-        <div class="image-wrapper">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhEJfbAHz2CNp4xX4NPcGzrqznVLD26qGl_JrvYAILUQ&s=10" alt="Frango empanado Perdigão" />
-        </div>
-        <div class="content">
-          <h2 class="name">Frango empanado Perdigão</h2>
-          <p class="price">R$ 2,50</p>
-          <button class="buy-btn" data-name="Frango empanado Perdigão" data-price="2.50">Adicionar</button>
-        </div>
-      </article>
-
-      <article class="product">
-        <div class="image-wrapper">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1H8apRd0qK3QAV0Y9iL-tZeEpckk2RpvlWfxjFqE8pw&s=10" alt="Pirulito Cherry Pop" />
-        </div>
-        <div class="content">
-          <h2 class="name">Pirulito Cherry Pop</h2>
-          <p class="price">R$ 0,50</p>
-          <button class="buy-btn" data-name="Pirulito Cherry Pop" data-price="0.50">Adicionar</button>
-        </div>
-      </article>
-
-      <article class="product">
-        <div class="image-wrapper">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUo2nFY3uqP4y55SielIatk-IKpjI1xlIdIQwOLH_3EQ&s=10" alt="Salsicha Sadia" />
-        </div>
-        <div class="content">
-          <h2 class="name">Salsicha Sadia</h2>
-          <p class="price">R$ 1,00</p>
-          <button class="buy-btn" data-name="Salsicha Sadia" data-price="1.00">Adicionar</button>
-        </div>
-      </article>
-    </section>
-
-    <aside class="cart" aria-live="polite">
-      <div class="cart-header">
-        <h2 class="cart-title">Carrinho</h2>
-        <span class="cart-count" id="cart-count">0 itens</span>
-      </div>
-
-      <ul class="cart-items" id="cart-items">
-        <li class="cart-empty">Seu carrinho está vazio.</li>
-      </ul>
-
-      <div class="cart-footer">
-        <div class="cart-total">Total: <span id="cart-total">R$ 0,00</span></div>
-        <button class="checkout-btn" id="checkout-btn" disabled>Finalizar compra</button>
-      </div>
-    </aside>
-
-    <div class="footer">
-      <p>Conveniência da Vizinhança • Produtos do dia a dia</p>
-    </div>
-  </div>
-
-  <script>
-    const whatsappNumber = '5592984067185';
-    const cart = [];
-
-    const cartItemsEl = document.getElementById('cart-items');
-    const cartCountEl = document.getElementById('cart-count');
-    const cartTotalEl = document.getElementById('cart-total');
-    const checkoutBtn = document.getElementById('checkout-btn');
-
-    function formatCurrency(value) {
-      return new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }).format(value);
-    }
-
-    function renderCart() {
-      if (cart.length === 0) {
-        cartItemsEl.innerHTML = '<li class="cart-empty">Seu carrinho está vazio.</li>';
-        cartCountEl.textContent = '0 itens';
-        cartTotalEl.textContent = 'R$ 0,00';
-        checkoutBtn.disabled = true;
-        return;
+        margin: 34px 0 20px;
+        gap: 12px;
       }
 
-      let total = 0;
-      cartItemsEl.innerHTML = cart.map(item => {
-        total += item.price * item.quantity;
-        return `
-          <li class="cart-item">
-            <div class="cart-item-name">${item.name}</div>
-            <div class="cart-item-meta">
-              <span class="qty-badge">Qtd: ${item.quantity}</span>
-              <span class="cart-item-price">${formatCurrency(item.price * item.quantity)}</span>
-            </div>
-          </li>
-        `;
-      }).join('');
+      .section-header h2 {
+        margin: 0;
+        font-size: clamp(1.5rem, 2vw, 2.2rem);
+        letter-spacing: -0.04em;
+      }
 
-      cartCountEl.textContent = `${cart.reduce((sum, item) => sum + item.quantity, 0)} itens`;
-      cartTotalEl.textContent = formatCurrency(total);
-      checkoutBtn.disabled = false;
-    }
+      .section-header .tag {
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--primary-dark);
+        font-weight: 800;
+        background: rgba(255,107,53,0.08);
+        border: 1px solid rgba(255,107,53,0.12);
+        border-radius: 999px;
+        padding: 8px 12px;
+      }
 
-    document.querySelectorAll('.buy-btn').forEach((button) => {
-      button.addEventListener('click', () => {
-        const name = button.dataset.name;
-        const price = Number(button.dataset.price);
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 20px;
+      }
 
-        const existing = cart.find(item => item.name === name);
+      .product-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 14px 28px rgba(17, 24, 39, 0.06);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
 
-        if (existing) {
-          existing.quantity += 1;
-        } else {
-          cart.push({ name, price, quantity: 1 });
+      .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 30px rgba(17, 24, 39, 0.09);
+      }
+
+      .product-image {
+        position: relative;
+        height: 220px;
+        overflow: hidden;
+        background: #eef1f5;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: rgba(255,255,255,0.9);
+        color: var(--primary-dark);
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-radius: 99px;
+        padding: 7px 10px;
+      }
+
+      .product-body {
+        padding: 18px 18px 20px;
+      }
+
+      .product-name {
+        margin: 0 0 10px;
+        font-size: 1.15rem;
+        letter-spacing: -0.025em;
+      }
+
+      .product-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .price {
+        color: var(--primary-dark);
+        font-size: 1.7rem;
+        font-weight: 800;
+        letter-spacing: -0.06em;
+      }
+
+      .small-tag {
+        color: var(--success);
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        background: rgba(21, 164, 109, 0.08);
+        padding: 7px 9px;
+        border-radius: 999px;
+      }
+
+      .bottom-banner {
+        margin-top: 34px;
+        background: linear-gradient(135deg, #fff1ea, #fff9f4);
+        border: 1px solid rgba(255,107,53,0.12);
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 22px 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .bottom-banner h3 {
+        margin: 0 0 8px;
+        font-size: clamp(1.2rem, 2vw, 1.7rem);
+      }
+
+      .bottom-banner p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .footer {
+        margin-top: 28px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.92rem;
+        padding-bottom: 10px;
+      }
+
+      @media (max-width: 760px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
         }
 
-        renderCart();
-      });
-    });
+        .hero-copy {
+          padding: 28px 22px 18px;
+        }
 
-    checkoutBtn.addEventListener('click', () => {
-      if (cart.length === 0) return;
+        .hero-visual {
+          min-height: 220px;
+        }
 
-      const orderSummary = cart.map(item => `${item.quantity}x ${item.name} - ${formatCurrency(item.price * item.quantity)}`).join(', ');
-      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      const message = encodeURIComponent(
-        `Olá! Quero finalizar meu pedido.\n\n${orderSummary}\n\nTotal: ${formatCurrency(total)}`
-      );
+        .topbar {
+          flex-wrap: wrap;
+        }
 
-      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
-    });
-  </script>
-</body>
+        .bottom-banner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-mark">CV</div>
+          <div class="brand-name">Conveniência da Vizinhança</div>
+        </div>
+        <a href="#catalogo" class="cta">Peça agora</a>
+      </div>
+
+      <header class="hero">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="pill">Mais praticidade</span>
+            <h1>Produtos do dia a dia em um só lugar.</h1>
+            <p>
+              Tudo para a casa, cozinha e rotina com preços acessíveis e atendimento rápido.
+            </p>
+            <div class="hero-actions">
+              <a href="#catalogo" class="btn-primary">Ver catálogo</a>
+              <a href="#contato" class="btn-secondary">Fale conosco</a>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="bonito-card">
+              <div class="label">Oferta do dia</div>
+              <div class="price">R$ 2,50</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="section-header" id="catalogo">
+        <h2>Produtos em destaque</h2>
+        <span class="tag">Loja moderna</span>
+      </div>
+
+      <section class="product-grid">
+        <article class="product-card">
+          <div class="product-image">
+            <span class="badge">Essencial</span>
+            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80" alt="Calabresa Sadia" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Calabresa Sadia</h3>
+            <div class="product-meta">
+              <div class="price">R$ 8,00</div>
+              <span class="small-tag">Melhor preço</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="badge">Casa</span>
+            <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=900&q=80" alt="Sabonete" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Sabonete</h3>
+            <div class="product-meta">
+              <div class="price">R$ 2,50</div>
+              <span class="small-tag">Popular</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="badge">Cozinha</span>
+            <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=900&q=80" alt="Miojo" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Miojo</h3>
+            <div class="product-meta">
+              <div class="price">R$ 2,75</div>
+              <span class="small-tag">Rápido</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="badge">Refresco</span>
+            <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=900&q=80" alt="Água mineral YARA 2L" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Água mineral YARA 2L</h3>
+            <div class="product-meta">
+              <div class="price">R$ 5,00</div>
+              <span class="small-tag">Fresca</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="badge">Sabor</span>
+            <img src="https://images.unsplash.com/photo-1622483767028-3f66f2b1d9a7?auto=format&fit=crop&w=900&q=80" alt="Coca-Cola 2L" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Coca-Cola 2L</h3>
+            <div class="product-meta">
+              <div class="price">R$ 12,00</div>
+              <span class="small-tag">Mais pedida</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="badge">Limpeza</span>
+            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80" alt="Sabão de lavar louça Brinort" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Sabão de lavar louça Brinort</h3>
+            <div class="product-meta">
+              <div class="price">R$ 3,00</div>
+              <span class="small-tag">Limpeza</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="badge">Quentinho</span>
+            <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80" alt="Frango empanado Perdigão" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Frango empanado Perdigão</h3>
+            <div class="product-meta">
+              <div class="price">R$ 2,50</div>
+              <span class="small-tag">Delícia</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="badge">Doces</span>
+            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80" alt="Pirulito Cherry Pop" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Pirulito Cherry Pop</h3>
+            <div class="product-meta">
+              <div class="price">R$ 0,50</div>
+              <span class="small-tag">Aproveite</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            <span class="badge">Embutidos</span>
+            <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=900&q=80" alt="Salsicha Sadia" />
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Salsicha Sadia</h3>
+            <div class="product-meta">
+              <div class="price">R$ 1,00</div>
+              <span class="small-tag">Vale muito</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <div class="bottom-banner" id="contato">
+        <div>
+          <h3>Fale com a loja</h3>
+          <p>Atendimento rápido e produtos para a sua rotina.</p>
+        </div>
+        <a href="https://wa.me/5511000000000" class="btn-primary" target="_blank" rel="noreferrer">WhatsApp</a>
+      </div>
+
+      <div class="footer">Conveniência da Vizinhança • Produtos do dia a dia</div>
+    </div>
+  </body>
 </html>
