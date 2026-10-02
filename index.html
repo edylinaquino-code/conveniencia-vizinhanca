@@ -6,20 +6,20 @@
   <title>Conveniência da Vizinhança</title>
   <style>
     :root {
-      --bg: #f8f7f4;
+      --bg: #f7f4ee;
       --card: #ffffff;
       --primary: #d64545;
       --primary-dark: #b93030;
-      --gold-1: #f9e7a4;
-      --gold-2: #d7a93b;
-      --gold-3: #c68a1f;
-      --gold-4: #7b4e12;
-      --dark: #0a0a0a;
+      --gold-1: #f8ebba;
+      --gold-2: #f0c95d;
+      --gold-3: #d59c2b;
+      --gold-4: #855712;
+      --dark: #080808;
       --dark-2: #171717;
       --text: #1c1c1c;
       --muted: #6f6f6f;
       --border: #ebebeb;
-      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --shadow: 0 14px 32px rgba(0,0,0,0.12);
     }
 
     * { box-sizing: border-box; }
@@ -32,45 +32,36 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 24px 16px 60px;
     }
 
     .header {
       position: relative;
-      background: radial-gradient(circle at center, #1a1a1a 0%, #090909 58%, #000 100%);
+      background: radial-gradient(circle at center, rgba(34,34,34,0.98) 0%, rgba(8,8,8,0.98) 52%, #000000 100%);
       color: #fff;
-      border-radius: 20px;
-      padding: 28px 20px 24px;
+      border-radius: 24px;
+      padding: 24px 20px 26px;
       box-shadow: 0 16px 30px rgba(0,0,0,0.18);
       text-align: center;
       margin-bottom: 22px;
       border: 2px solid rgba(221, 170, 68, 0.9);
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
     }
 
     .header::before,
     .header::after {
       content: "";
       position: absolute;
-      left: 8%;
-      right: 8%;
+      left: 6%;
+      right: 6%;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(247,204,95,0.9), transparent);
+      background: linear-gradient(90deg, transparent, rgba(247,204,95,0.92), transparent);
     }
 
-    .header::before {
-      top: 18px;
-    }
-
-    .header::after {
-      bottom: 18px;
-    }
+    .header::before { top: 18px; }
+    .header::after { bottom: 18px; }
 
     .brand-mark {
       position: relative;
@@ -79,7 +70,7 @@
       justify-content: center;
       width: 190px;
       height: 96px;
-      margin-top: 6px;
+      margin: 0 auto 8px;
       z-index: 1;
     }
 
@@ -87,32 +78,46 @@
       width: 100%;
       height: 100%;
       display: block;
-      filter: drop-shadow(0 4px 8px rgba(255, 215, 127, 0.4));
+      filter: drop-shadow(0 5px 12px rgba(255, 212, 97, 0.35));
     }
 
-    .header h1 {
+    .header-title {
       position: relative;
       z-index: 1;
       margin: 0;
-      font-size: clamp(2.2rem, 6vw, 4rem);
       line-height: 0.9;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       font-weight: 900;
-      color: #f6d579;
-      text-shadow: 0 3px 0 rgba(0,0,0,0.18), 0 8px 22px rgba(255, 194, 66, 0.22);
+      color: var(--gold-2);
+      text-shadow: 0 3px 0 rgba(0,0,0,0.18), 0 10px 20px rgba(255, 193, 53, 0.18);
     }
 
-    .header p {
+    .header-title .line1,
+    .header-title .line2 {
+      display: block;
+    }
+
+    .header-title .line1 {
+      font-size: clamp(2.2rem, 6vw, 4.6rem);
+    }
+
+    .header-title .line2 {
+      font-size: clamp(2.1rem, 5.2vw, 4rem);
+      color: #f7d88a;
+      text-shadow: 0 3px 0 rgba(0,0,0,0.18), 0 10px 20px rgba(255, 193, 53, 0.18);
+    }
+
+    .header-subtitle {
       position: relative;
       z-index: 1;
-      margin: 0;
-      font-size: 1.05rem;
+      margin: 16px 0 0;
+      font-size: 1rem;
       font-weight: 700;
-      color: #f5d98c;
+      color: #f3d78f;
       letter-spacing: 0.8px;
       text-transform: uppercase;
-      opacity: 0.95;
+      opacity: 0.96;
     }
 
     .grid {
@@ -183,11 +188,15 @@
 
       .brand-mark {
         width: 150px;
-        height: 76px;
+        height: 78px;
       }
 
-      .header h1 {
-        letter-spacing: 1px;
+      .header-title .line1 {
+        font-size: clamp(2rem, 10vw, 3rem);
+      }
+
+      .header-title .line2 {
+        font-size: clamp(1.9rem, 9vw, 2.8rem);
       }
     }
   </style>
@@ -213,8 +222,13 @@
           <circle cx="128" cy="44" r="4.5" fill="#fff4b8"/>
         </svg>
       </div>
-      <h1>Conveniência da Vizinhança</h1>
-      <p>Produtos essenciais e de qualidade para o dia a dia</p>
+
+      <h1 class="header-title">
+        <span class="line1">Conveniência</span>
+        <span class="line2">Vizinhança</span>
+      </h1>
+
+      <p class="header-subtitle">Produtos essenciais e de qualidade para o dia a dia</p>
     </header>
 
     <section class="grid">
