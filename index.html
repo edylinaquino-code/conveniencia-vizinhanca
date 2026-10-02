@@ -72,15 +72,17 @@
       transform: translateY(-2px);
     }
 
-    .image {
+    .image-wrapper {
       height: 180px;
-      background: linear-gradient(135deg, #f6d4d4, #f9e9d2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      color: var(--primary-dark);
-      font-weight: bold;
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .content {
@@ -113,7 +115,7 @@
         padding-right: 12px;
       }
 
-      .image {
+      .image-wrapper {
         height: 150px;
       }
     }
@@ -128,7 +130,9 @@
 
     <section class="grid">
       <article class="product">
-        <div class="image">🍖</div>
+        <div class="image-wrapper">
+          <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80" alt="Calabresa Sadia" />
+        </div>
         <div class="content">
           <h2 class="name">Calabresa Sadia</h2>
           <p class="price">R$ 8,00</p>
@@ -136,7 +140,9 @@
       </article>
 
       <article class="product">
-        <div class="image">🧼</div>
+        <div class="image-wrapper">
+          <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=900&q=80" alt="Sabonete" />
+        </div>
         <div class="content">
           <h2 class="name">Sabonete</h2>
           <p class="price">R$ 2,50</p>
@@ -144,7 +150,9 @@
       </article>
 
       <article class="product">
-        <div class="image">🍜</div>
+        <div class="image-wrapper">
+          <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=900&q=80" alt="Miojo" />
+        </div>
         <div class="content">
           <h2 class="name">Miojo</h2>
           <p class="price">R$ 2,75</p>
@@ -152,7 +160,9 @@
       </article>
 
       <article class="product">
-        <div class="image">💧</div>
+        <div class="image-wrapper">
+          <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=900&q=80" alt="Água mineral YARA 2L" />
+        </div>
         <div class="content">
           <h2 class="name">Água mineral YARA 2L</h2>
           <p class="price">R$ 5,00</p>
@@ -160,7 +170,9 @@
       </article>
 
       <article class="product">
-        <div class="image">🥤</div>
+        <div class="image-wrapper">
+          <img src="https://images.unsplash.com/photo-1622483767028-3f66f2b1d9a7?auto=format&fit=crop&w=900&q=80" alt="Coca-Cola 2L" />
+        </div>
         <div class="content">
           <h2 class="name">Coca-Cola 2L</h2>
           <p class="price">R$ 12,00</p>
@@ -168,7 +180,9 @@
       </article>
 
       <article class="product">
-        <div class="image">🧴</div>
+        <div class="image-wrapper">
+          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80" alt="Sabão de lavar louça Brinort" />
+        </div>
         <div class="content">
           <h2 class="name">Sabão de lavar louça Brinort</h2>
           <p class="price">R$ 3,00</p>
@@ -176,7 +190,9 @@
       </article>
 
       <article class="product">
-        <div class="image">🍗</div>
+        <div class="image-wrapper">
+          <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80" alt="Frango empanado Perdigão" />
+        </div>
         <div class="content">
           <h2 class="name">Frango empanado Perdigão</h2>
           <p class="price">R$ 2,50</p>
@@ -184,7 +200,9 @@
       </article>
 
       <article class="product">
-        <div class="image">🍭</div>
+        <div class="image-wrapper">
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80" alt="Pirulito Cherry Pop" />
+        </div>
         <div class="content">
           <h2 class="name">Pirulito Cherry Pop</h2>
           <p class="price">R$ 0,50</p>
@@ -192,7 +210,9 @@
       </article>
 
       <article class="product">
-        <div class="image">🌭</div>
+        <div class="image-wrapper">
+          <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=900&q=80" alt="Salsicha Sadia" />
+        </div>
         <div class="content">
           <h2 class="name">Salsicha Sadia</h2>
           <p class="price">R$ 1,00</p>
