@@ -263,7 +263,7 @@
         <div class="content">
           <h2 class="name">Calabresa Sadia</h2>
           <p class="price">R$ 8,00</p>
-          <button class="buy-btn">Adicionar</button>
+          <button class="buy-btn" data-product="Calabresa Sadia" data-price="R$ 8,00">Adicionar</button>
         </div>
       </article>
 
@@ -274,7 +274,7 @@
         <div class="content">
           <h2 class="name">Sabonete</h2>
           <p class="price">R$ 2,50</p>
-          <button class="buy-btn">Adicionar</button>
+          <button class="buy-btn" data-product="Sabonete" data-price="R$ 2,50">Adicionar</button>
         </div>
       </article>
 
@@ -285,7 +285,7 @@
         <div class="content">
           <h2 class="name">Miojo</h2>
           <p class="price">R$ 2,75</p>
-          <button class="buy-btn">Adicionar</button>
+          <button class="buy-btn" data-product="Miojo" data-price="R$ 2,75">Adicionar</button>
         </div>
       </article>
 
@@ -296,7 +296,7 @@
         <div class="content">
           <h2 class="name">Água mineral YARA 2L</h2>
           <p class="price">R$ 5,00</p>
-          <button class="buy-btn">Adicionar</button>
+          <button class="buy-btn" data-product="Água mineral YARA 2L" data-price="R$ 5,00">Adicionar</button>
         </div>
       </article>
 
@@ -307,7 +307,7 @@
         <div class="content">
           <h2 class="name">Coca-Cola 2L</h2>
           <p class="price">R$ 12,00</p>
-          <button class="buy-btn">Adicionar</button>
+          <button class="buy-btn" data-product="Coca-Cola 2L" data-price="R$ 12,00">Adicionar</button>
         </div>
       </article>
 
@@ -318,7 +318,7 @@
         <div class="content">
           <h2 class="name">Sabão de lavar louça Brinort</h2>
           <p class="price">R$ 3,00</p>
-          <button class="buy-btn">Adicionar</button>
+          <button class="buy-btn" data-product="Sabão de lavar louça Brinort" data-price="R$ 3,00">Adicionar</button>
         </div>
       </article>
 
@@ -329,7 +329,7 @@
         <div class="content">
           <h2 class="name">Frango empanado Perdigão</h2>
           <p class="price">R$ 2,50</p>
-          <button class="buy-btn">Adicionar</button>
+          <button class="buy-btn" data-product="Frango empanado Perdigão" data-price="R$ 2,50">Adicionar</button>
         </div>
       </article>
 
@@ -340,7 +340,7 @@
         <div class="content">
           <h2 class="name">Pirulito Cherry Pop</h2>
           <p class="price">R$ 0,50</p>
-          <button class="buy-btn">Adicionar</button>
+          <button class="buy-btn" data-product="Pirulito Cherry Pop" data-price="R$ 0,50">Adicionar</button>
         </div>
       </article>
 
@@ -351,7 +351,7 @@
         <div class="content">
           <h2 class="name">Salsicha Sadia</h2>
           <p class="price">R$ 1,00</p>
-          <button class="buy-btn">Adicionar</button>
+          <button class="buy-btn" data-product="Salsicha Sadia" data-price="R$ 1,00">Adicionar</button>
         </div>
       </article>
     </section>
@@ -360,5 +360,21 @@
       <p>Conveniência da Vizinhança • Produtos do dia a dia</p>
     </div>
   </div>
+
+  <script>
+    const whatsappNumber = '5592984067185';
+
+    document.querySelectorAll('.buy-btn').forEach((button) => {
+      button.addEventListener('click', () => {
+        const product = button.dataset.product || 'Produto';
+        const price = button.dataset.price || 'Preço';
+        const message = encodeURIComponent(
+          `Olá! Gostaria de comprar ${product} (${price}).`
+        );
+
+        window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+      });
+    });
+  </script>
 </body>
 </html>
