@@ -193,6 +193,127 @@
       box-shadow: 0 10px 22px rgba(214, 69, 69, 0.3);
     }
 
+    .cart {
+      margin-top: 24px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 18px 16px;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cart-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .cart-count {
+      background: #fbe7e7;
+      color: var(--primary-dark);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .cart-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .cart-item-name {
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .cart-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .qty-badge {
+      background: #f4f4f4;
+      border-radius: 999px;
+      padding: 6px 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .cart-item-price {
+      color: var(--primary-dark);
+      font-weight: 700;
+      min-width: 86px;
+      text-align: right;
+    }
+
+    .cart-empty {
+      padding: 12px 8px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .cart-footer {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .cart-total {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .checkout-btn {
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1db954, #0c8a3a);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 12px 18px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(29, 185, 84, 0.22);
+    }
+
+    .checkout-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     .footer {
       text-align: center;
       margin-top: 28px;
@@ -221,6 +342,16 @@
 
       .header-title .line2 {
         font-size: clamp(1.9rem, 9vw, 2.8rem);
+      }
+
+      .cart-item {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .cart-item-meta {
+        width: 100%;
+        justify-content: space-between;
       }
     }
   </style>
@@ -263,7 +394,7 @@
         <div class="content">
           <h2 class="name">Calabresa Sadia</h2>
           <p class="price">R$ 8,00</p>
-          <button class="buy-btn" data-product="Calabresa Sadia" data-price="R$ 8,00">Adicionar</button>
+          <button class="buy-btn" data-name="Calabresa Sadia" data-price="8.00">Adicionar</button>
         </div>
       </article>
 
@@ -274,7 +405,7 @@
         <div class="content">
           <h2 class="name">Sabonete</h2>
           <p class="price">R$ 2,50</p>
-          <button class="buy-btn" data-product="Sabonete" data-price="R$ 2,50">Adicionar</button>
+          <button class="buy-btn" data-name="Sabonete" data-price="2.50">Adicionar</button>
         </div>
       </article>
 
@@ -285,7 +416,7 @@
         <div class="content">
           <h2 class="name">Miojo</h2>
           <p class="price">R$ 2,75</p>
-          <button class="buy-btn" data-product="Miojo" data-price="R$ 2,75">Adicionar</button>
+          <button class="buy-btn" data-name="Miojo" data-price="2.75">Adicionar</button>
         </div>
       </article>
 
@@ -296,7 +427,7 @@
         <div class="content">
           <h2 class="name">Água mineral YARA 2L</h2>
           <p class="price">R$ 5,00</p>
-          <button class="buy-btn" data-product="Água mineral YARA 2L" data-price="R$ 5,00">Adicionar</button>
+          <button class="buy-btn" data-name="Água mineral YARA 2L" data-price="5.00">Adicionar</button>
         </div>
       </article>
 
@@ -307,7 +438,7 @@
         <div class="content">
           <h2 class="name">Coca-Cola 2L</h2>
           <p class="price">R$ 12,00</p>
-          <button class="buy-btn" data-product="Coca-Cola 2L" data-price="R$ 12,00">Adicionar</button>
+          <button class="buy-btn" data-name="Coca-Cola 2L" data-price="12.00">Adicionar</button>
         </div>
       </article>
 
@@ -318,7 +449,7 @@
         <div class="content">
           <h2 class="name">Sabão de lavar louça Brinort</h2>
           <p class="price">R$ 3,00</p>
-          <button class="buy-btn" data-product="Sabão de lavar louça Brinort" data-price="R$ 3,00">Adicionar</button>
+          <button class="buy-btn" data-name="Sabão de lavar louça Brinort" data-price="3.00">Adicionar</button>
         </div>
       </article>
 
@@ -329,7 +460,7 @@
         <div class="content">
           <h2 class="name">Frango empanado Perdigão</h2>
           <p class="price">R$ 2,50</p>
-          <button class="buy-btn" data-product="Frango empanado Perdigão" data-price="R$ 2,50">Adicionar</button>
+          <button class="buy-btn" data-name="Frango empanado Perdigão" data-price="2.50">Adicionar</button>
         </div>
       </article>
 
@@ -340,7 +471,7 @@
         <div class="content">
           <h2 class="name">Pirulito Cherry Pop</h2>
           <p class="price">R$ 0,50</p>
-          <button class="buy-btn" data-product="Pirulito Cherry Pop" data-price="R$ 0,50">Adicionar</button>
+          <button class="buy-btn" data-name="Pirulito Cherry Pop" data-price="0.50">Adicionar</button>
         </div>
       </article>
 
@@ -351,10 +482,26 @@
         <div class="content">
           <h2 class="name">Salsicha Sadia</h2>
           <p class="price">R$ 1,00</p>
-          <button class="buy-btn" data-product="Salsicha Sadia" data-price="R$ 1,00">Adicionar</button>
+          <button class="buy-btn" data-name="Salsicha Sadia" data-price="1.00">Adicionar</button>
         </div>
       </article>
     </section>
+
+    <aside class="cart" aria-live="polite">
+      <div class="cart-header">
+        <h2 class="cart-title">Carrinho</h2>
+        <span class="cart-count" id="cart-count">0 itens</span>
+      </div>
+
+      <ul class="cart-items" id="cart-items">
+        <li class="cart-empty">Seu carrinho está vazio.</li>
+      </ul>
+
+      <div class="cart-footer">
+        <div class="cart-total">Total: <span id="cart-total">R$ 0,00</span></div>
+        <button class="checkout-btn" id="checkout-btn" disabled>Finalizar compra</button>
+      </div>
+    </aside>
 
     <div class="footer">
       <p>Conveniência da Vizinhança • Produtos do dia a dia</p>
@@ -363,17 +510,75 @@
 
   <script>
     const whatsappNumber = '5592984067185';
+    const cart = [];
+
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartCountEl = document.getElementById('cart-count');
+    const cartTotalEl = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+
+    function formatCurrency(value) {
+      return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).format(value);
+    }
+
+    function renderCart() {
+      if (cart.length === 0) {
+        cartItemsEl.innerHTML = '<li class="cart-empty">Seu carrinho está vazio.</li>';
+        cartCountEl.textContent = '0 itens';
+        cartTotalEl.textContent = 'R$ 0,00';
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      let total = 0;
+      cartItemsEl.innerHTML = cart.map(item => {
+        total += item.price * item.quantity;
+        return `
+          <li class="cart-item">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-meta">
+              <span class="qty-badge">Qtd: ${item.quantity}</span>
+              <span class="cart-item-price">${formatCurrency(item.price * item.quantity)}</span>
+            </div>
+          </li>
+        `;
+      }).join('');
+
+      cartCountEl.textContent = `${cart.reduce((sum, item) => sum + item.quantity, 0)} itens`;
+      cartTotalEl.textContent = formatCurrency(total);
+      checkoutBtn.disabled = false;
+    }
 
     document.querySelectorAll('.buy-btn').forEach((button) => {
       button.addEventListener('click', () => {
-        const product = button.dataset.product || 'Produto';
-        const price = button.dataset.price || 'Preço';
-        const message = encodeURIComponent(
-          `Olá! Gostaria de comprar ${product} (${price}).`
-        );
+        const name = button.dataset.name;
+        const price = Number(button.dataset.price);
 
-        window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+        const existing = cart.find(item => item.name === name);
+
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cart.push({ name, price, quantity: 1 });
+        }
+
+        renderCart();
       });
+    });
+
+    checkoutBtn.addEventListener('click', () => {
+      if (cart.length === 0) return;
+
+      const orderSummary = cart.map(item => `${item.quantity}x ${item.name} - ${formatCurrency(item.price * item.quantity)}`).join(', ');
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const message = encodeURIComponent(
+        `Olá! Quero finalizar meu pedido.\n\n${orderSummary}\n\nTotal: ${formatCurrency(total)}`
+      );
+
+      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
     });
   </script>
 </body>
